@@ -1,0 +1,24 @@
+@import "../../app/globals.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
+
+  div {
+    width: 450px;
+    height: 446px;
+    border: 1px solid $variant-border;
+    border-radius: 16px;
+    box-shadow: 0px 1px 2px 0px $box-shadow;
+  }
+  p {
+    color: $variant-color;
+    font-weight: 400;
+    text-align: center;
+    margin: 32px 0 0 0;
+  }
+}
