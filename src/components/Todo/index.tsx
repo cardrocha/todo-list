@@ -14,6 +14,8 @@ interface Task {
 }
 
 export const Todo = () => {
+  const [isClient, setIsClient] = useState(false);
+  
   const {
     isModalOpen,
     setIsModalOpen,
@@ -21,25 +23,31 @@ export const Todo = () => {
     setIsModalDeleteOpen,
   } = useModal();
   const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
-  const [taskTemp, setTaskTemp] = useState<string>("");
+  const [taskTemp, setTaskTemp] = useState<string>("");  
   const [tasks, setTasks] = useState<Task[]>(() => {
-    const stored = localStorage.getItem("task");
 
-    if (stored) {
-      return JSON.parse(stored);
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("task");
+      return stored ? JSON.parse(stored) : [];
     }
-
     return [];
   });
 
   useEffect(() => {
-    localStorage.setItem("task", JSON.stringify(tasks));
-  }, [tasks]);
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("task");
+    if (stored) {
+      setTasks(JSON.parse(stored));
+    }
+  }, []);
 
   const addTask = () => {
     if (taskTemp.trim() === "") return;
 
-    const newTask = {
+    const newTask: Task = {
       id: tasks.length + 1,
       task: taskTemp,
       completed: false,
@@ -47,6 +55,7 @@ export const Todo = () => {
 
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
+    localStorage.setItem("task", JSON.stringify(updatedTasks)); 
     setTaskTemp("");
     setIsModalOpen(false);
   };
@@ -54,6 +63,7 @@ export const Todo = () => {
   const deleteTask = (id: number) => {
     const updatedTasks = tasks.filter((item) => item.id !== id);
     setTasks(updatedTasks);
+    localStorage.setItem("task", JSON.stringify(updatedTasks)); 
     setIsModalDeleteOpen(false);
   };
 
@@ -62,6 +72,7 @@ export const Todo = () => {
       item.id === id ? { ...item, completed: !item.completed } : item
     );
     setTasks(updatedTasks);
+    localStorage.setItem("task", JSON.stringify(updatedTasks)); 
   };
 
   return (
@@ -76,7 +87,7 @@ export const Todo = () => {
         <div>
           <p>Suas tarefas de hoje</p>
           <ul className={styles.task}>
-            {tasks
+            {isClient && tasks
               .filter((task) => !task.completed)
               .map((task) => (
                 <li key={task.id}>
@@ -100,7 +111,7 @@ export const Todo = () => {
               ))}
             <p className={styles.task}>Tarefas finalizadas</p>
             <ul>
-              {tasks
+              {isClient && tasks
                 .filter((task) => task.completed)
                 .map((task) => (
                   <li key={task.id} className={styles.completedTask}>
@@ -129,7 +140,7 @@ export const Todo = () => {
           onClick={() => setIsModalOpen(!isModalOpen)}
           className={styles.button}
         >
-          Adcionar nova tarefa
+          Adicionar nova tarefa
         </Button>
       </div>
 
@@ -139,8 +150,11 @@ export const Todo = () => {
       >
         <div className={styles.containerContent}>
           <h2>Nova Tarefa</h2>
-          <form className={styles.containeForm}>
-            <label htmlFor="task">Titulo</label>
+          <form className={styles.containeForm} onSubmit={(e) => {
+            e.preventDefault();
+            addTask();
+          }}>
+            <label htmlFor="task">Título</label>
             <input
               type="text"
               name="task"
@@ -151,7 +165,7 @@ export const Todo = () => {
           </form>
           <div className={styles.containerButton}>
             <Button
-              onClick={() => setIsModalOpen(!isModalOpen)}
+              onClick={() => setIsModalOpen(false)}
               className={styles.buttonCancel}
             >
               Cancelar
@@ -161,7 +175,7 @@ export const Todo = () => {
               className={styles.buttonAdd}
               type="submit"
             >
-              Adcionar
+              Adicionar
             </Button>
           </div>
         </div>
@@ -176,7 +190,7 @@ export const Todo = () => {
           <p>Tem certeza que você deseja deletar essa tarefa?</p>
           <div className={styles.containerButton}>
             <Button
-              onClick={() => setIsModalDeleteOpen(!isModalDeleteOpen)}
+              onClick={() => setIsModalDeleteOpen(false)}
               className={styles.buttonCancel}
             >
               Cancelar
@@ -194,3 +208,4 @@ export const Todo = () => {
     </>
   );
 };
+
