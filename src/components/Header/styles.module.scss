@@ -1,11 +1,16 @@
-@import "../../app/globals.module.scss";
+@import "../../app/global.module.scss";
 
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 4px 24px 4px;
+  padding: 24px 4px 24px 4px;
   border-bottom: 1px solid $border;
+
+  &.blur {
+    filter: blur(2.5px);
+    pointer-events: none;
+  }
 
   h1 {
     font-size: 24px;

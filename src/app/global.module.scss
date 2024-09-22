@@ -9,18 +9,12 @@ $gradient-blue-two: #53C0F0;
 $gradient-red-one: #D30707;
 $gradient-red-two: #D30707;
 $box-shadow: #1018280D;
+$variant-box-shadow: #1018282E;
 
 .global {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: 'Inter Tight', sans-serif;
-}
-
-.body {
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
-  background-color: $primary-color;
+  background-color: #fff;
+  font-family: 'Inter Tight', sans-serif;
 }
-

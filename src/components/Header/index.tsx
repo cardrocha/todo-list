@@ -1,11 +1,16 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../img/logo.svg"
 import styles from "./styles.module.scss"
+import { useModal } from "@/myContextr";
 
 export const Header = () => {
+  const { isModalOpen } = useModal();
+
   return (
-    <header className={styles.container}>
+    <header className={`${styles.container} ${isModalOpen ? styles.blur : ""}`}>
       <Link href="/">
         <Image
           width={150}
