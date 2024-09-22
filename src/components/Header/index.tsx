@@ -1,16 +1,29 @@
-'use client'
+'use client';
 
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../img/logo.svg"
-import styles from "./styles.module.scss"
+import logo from "../../img/logo.svg";
+import styles from "./styles.module.scss";
 import { useModal } from "@/myContextr";
 
 export const Header = () => {
-  const { isModalOpen } = useModal();
+  const { isModalOpen, isModalDeleteOpen } = useModal();
+
+  const date = new Date();
+
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  };
+
+  const formattedDate = new Intl.DateTimeFormat('pt-BR', options).format(date);
+  
+  const capitalizedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
 
   return (
-    <header className={`${styles.container} ${isModalOpen ? styles.blur : ""}`}>
+    <header className={`${styles.container} ${isModalOpen || isModalDeleteOpen ? styles.blur : ""}`}>
       <Link href="/">
         <Image
           width={150}
@@ -20,7 +33,8 @@ export const Header = () => {
         />
       </Link>
       <h1>Bem-vindo de volta, Card</h1>
-      <p>Segunda, 01 de dezembro de 2025</p>
+      <p>{capitalizedDate}</p> {/* Exibir a data formatada e capitalizada */}
     </header>
   );
 };
+
