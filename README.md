@@ -1,8 +1,21 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# To-Do List
 
-First, run the development server:
+## Descrição
+Este projeto é uma aplicação de lista de tarefas (To-Do List) desenvolvida com **Next.js**, **TypeScript** e **SCSS**. A aplicação permite que os usuários adicionem, visualizem e removam tarefas, além de armazená-las localmente no navegador usando **LocalStorage**.
+
+## Funcionalidades
+- **Adicionar Tarefas**: Permite ao usuário adicionar novas tarefas à lista.
+- **Remover Tarefas**: Usuários podem remover tarefas já concluídas ou que não desejam mais.
+- **Armazenamento Local**: As tarefas são armazenadas no **LocalStorage**, garantindo que as informações sejam persistentes mesmo após o fechamento do navegador.
+- **Gerenciamento de Estado**: Utiliza a **Context API** do React para gerenciar o estado das tarefas de forma global.
+
+## Tecnologias Utilizadas
+- **Next.js**: Framework para React que permite renderização do lado do servidor e geração de sites estáticos.
+- **TypeScript**: Superset do JavaScript que adiciona tipagem estática.
+- **SCSS**: Pré-processador CSS que facilita a escrita de estilos de forma modular e organizada.
+- **Context API**: Método do React para gerenciar o estado global da aplicação.
 
 ```bash
 npm run dev
