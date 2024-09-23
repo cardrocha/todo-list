@@ -11,7 +11,7 @@ Este projeto é uma aplicação de lista de tarefas (To-Do List) desenvolvida co
 - **Adicionar Tarefas**: Permite ao usuário adicionar novas tarefas à lista.
 - **Remover Tarefas**: Usuários podem remover tarefas já concluídas ou que não desejam mais.
 - **Armazenamento Local**: As tarefas são armazenadas no **LocalStorage**, garantindo que as informações sejam persistentes mesmo após o fechamento do navegador.
-- **Gerenciamento de Estado**: Utiliza a **Context API** do React para gerenciar o estado das tarefas de forma global.
+- **Gerenciamento de Estado**: Utiliza a **Context API** do React para gerenciar o estado as modais de forma global, aplicando efeito desfoce no header e todo components.
 
 ## Tecnologias Utilizadas
 - **Next.js**: Framework para React que permite renderização do lado do servidor e geração de sites estáticos.
